@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Zero to Athletic — Personal Fitness Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #F7F4EF;
+    --paper:   #FDFCFA;
+    --ink:     #1A1612;
+    --ink2:    #4A4540;
+    --ink3:    #9A9088;
+    --rule:    #E2DDD8;
+    --accent:  #C84B2F;
+    --accent2: #D4882A;
+    --green:   #2A7A4F;
+    --blue:    #2A5F8F;
+    --display: 'Playfair Display', Georgia, serif;
+    --body:    'Lora', Georgia, serif;
+    --mono:    'DM Mono', 'Courier New', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14px; line-height: 1.6; }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--rule); }
+  ::-webkit-scrollbar-thumb { background: var(--ink3); }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    padding: 32px 24px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; top: -50px; right: -50px;
+    width: 220px; height: 220px;
+    border: 60px solid rgba(200,75,47,0.15);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+    color: rgba(253,252,250,0.4); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: var(--display); font-size: clamp(28px,7vw,48px);
+    font-weight: 900; color: var(--paper); line-height: 1.05; margin-bottom: 10px;
+  }
+  .header-title em { color: var(--accent); font-style: italic; }
+  .header-sub { font-family: var(--mono); font-size: 11px; color: rgba(253,252,250,0.4); letter-spacing: 1px; }
+  .header-tags { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .header-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    padding: 5px 12px; border: 1px solid rgba(253,252,250,0.2);
+    color: rgba(253,252,250,0.7);
+  }
+  .header-tag.accent { color: var(--accent); border-color: rgba(200,75,47,0.4); }
+  .header-tag.gold   { color: var(--accent2); border-color: rgba(212,136,42,0.4); }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+    position: sticky; top: 0; z-index: 100;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-bar::-webkit-scrollbar { height: 0; }
+  .nav-inner { display: flex; padding: 0 8px; min-width: max-content; }
+  .nav-btn {
+    background: none; border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--ink3); font-family: var(--mono);
+    font-size: 10px; letter-spacing: 1.5px;
+    padding: 13px 12px; cursor: pointer;
+    white-space: nowrap; text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover { color: var(--accent); }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── PANELS ── */
+  .panel { display: none; max-width: 680px; margin: 0 auto; animation: fadeUp 0.35s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── TYPOGRAPHY HELPERS ── */
+  .panel-header { padding: 32px 24px 20px; border-bottom: 1px solid var(--rule); }
+  .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  .label.green { color: var(--green); }
+  .label.muted { color: var(--ink3); }
+  .label.blue  { color: var(--blue); }
+  .panel-title {
+    font-family: var(--display); font-size: clamp(22px,5vw,32px);
+    font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 10px;
+  }
+  .panel-intro { font-family: var(--body); font-size: 14px; color: var(--ink2); line-height: 1.75; }
+  .content { padding: 20px 24px; }
+  .section { margin-bottom: 32px; }
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin: 16px 0; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: rgba(200,75,47,0.3); transform: translateY(-1px); }
+  .card.accent-top  { border-top: 3px solid var(--accent); }
+  .card.accent2-top { border-top: 3px solid var(--accent2); }
+  .card.green-top   { border-top: 3px solid var(--green); }
+  .card.blue-top    { border-top: 3px solid var(--blue); }
+  .card.ink-top     { border-top: 3px solid var(--ink); }
+  .card.accent-left  { border-left: 3px solid var(--accent); }
+  .card.accent2-left { border-left: 3px solid var(--accent2); }
+  .card.green-left   { border-left: 3px solid var(--green); }
+  .card.blue-left    { border-left: 3px solid var(--blue); }
+  .card.purple-left  { border-left: 3px solid #7A4FA8; }
+  .card-title { font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 5px; }
+  .card-sub   { font-family: var(--body); font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+  /* ── TAGS / PILLS ── */
+  .tag {
+    display: inline-block;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 8px;
+    border: 1px solid; margin-right: 6px; margin-bottom: 4px;
+  }
+  .tag.accent  { color: var(--accent); border-color: rgba(200,75,47,0.4); }
+  .tag.accent2 { color: var(--accent2); border-color: rgba(212,136,42,0.4); }
+  .tag.green   { color: var(--green); border-color: rgba(42,122,79,0.4); }
+  .tag.blue    { color: var(--blue); border-color: rgba(42,95,143,0.4); }
+  .tag.muted   { color: var(--ink3); border-color: var(--rule); }
+  .tag.purple  { color: #7A4FA8; border-color: rgba(122,79,168,0.4); }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 2px 0 2px 18px; margin: 20px 0;
+    font-family: var(--body); font-size: 15px;
+    font-style: italic; color: var(--ink2); line-height: 1.75;
+  }
+  .pullquote.green  { border-left-color: var(--green); }
+  .pullquote.accent2 { border-left-color: var(--accent2); }
+
+  /* ── BIG NUMBER ── */
+  .big-num {
+    font-family: var(--display); font-size: 48px;
+    font-weight: 900; color: var(--rule); line-height: 1;
+    flex-shrink: 0; user-select: none;
+  }
+
+  /* ── WEEK BUTTONS ── */
+  .week-grid { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 24px; }
+  .week-btn {
+    width: 40px; height: 40px;
+    background: var(--paper); border: 1px solid var(--rule);
+    color: var(--ink2); font-family: var(--mono); font-size: 11px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .week-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .week-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .week-btn.deload { background: rgba(42,122,79,0.08); }
+  .week-btn.milestone { background: rgba(122,79,168,0.08); }
+
+  /* ── DAY TABS ── */
+  .day-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid var(--rule); margin: 0 -24px; padding: 0 24px; }
+  .day-tabs::-webkit-scrollbar { height: 0; }
+  .day-tab {
+    background: none; border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--ink3); font-family: var(--mono);
+    font-size: 10px; letter-spacing: 1px;
+    padding: 13px 10px; cursor: pointer;
+    white-space: nowrap; text-transform: uppercase;
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+  .day-tab:hover { color: var(--accent); }
+  .day-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── EXERCISE CARD ── */
+  .ex-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 16px 18px; margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .ex-card:hover { border-color: rgba(200,75,47,0.3); }
+  .ex-card.priority { border-top: 3px solid var(--accent); }
+  .ex-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .ex-name { font-family: var(--body); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .ex-target { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-top: 3px; }
+  .ex-sets { text-align: right; flex-shrink: 0; margin-left: 12px; }
+  .ex-sets-num { font-family: var(--mono); font-size: 14px; color: var(--accent); font-weight: 500; }
+  .ex-rest { font-family: var(--mono); font-size: 10px; color: var(--ink3); }
+  .ex-cue { font-family: var(--body); font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    padding: 12px 14px; margin-bottom: 16px;
+    font-family: var(--body); font-size: 13px;
+    color: var(--ink2); line-height: 1.65;
+  }
+  .info-box.green { background: rgba(42,122,79,0.07); border: 1px solid rgba(42,122,79,0.25); }
+  .info-box.blue  { background: rgba(42,95,143,0.07); border: 1px solid rgba(42,95,143,0.2); }
+  .info-box.red   { background: rgba(200,75,47,0.07); border: 1px solid rgba(200,75,47,0.25); }
+
+  /* ── TIMELINE ── */
+  .timeline-item { display: flex; gap: 16px; }
+  .timeline-spine { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .timeline-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .timeline-line { width: 1px; flex: 1; background: var(--rule); margin: 4px 0 0; }
+  .timeline-body { padding-bottom: 28px; flex: 1; }
+
+  /* ── SCHEDULE TIMELINE ── */
+  .sched-time { font-family: var(--mono); font-size: 12px; font-weight: 500; }
+  .sched-task { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--ink); }
+  .sched-detail { font-family: var(--body); font-size: 13px; color: var(--ink2); line-height: 1.65; }
+
+  /* ── TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 1px;
+    color: var(--ink3); padding: 10px 8px; text-align: left;
+    border-bottom: 2px solid var(--ink); text-transform: uppercase;
+  }
+  .data-table td { padding: 10px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .data-table tr:nth-child(even) td { background: var(--bg); }
+  .data-table td:first-child { font-family: var(--body); font-weight: 600; color: var(--ink); }
+  .data-table td.m { font-family: var(--mono); font-size: 12px; }
+
+  /* ── ACCORDION ── */
+  .accordion-btn {
+    width: 100%; background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 16px 18px; cursor: pointer;
+    text-align: left; display: flex;
+    justify-content: space-between; align-items: center;
+    transition: background 0.2s;
+    margin-bottom: 0;
+  }
+  .accordion-btn.open { background: var(--ink); }
+  .accordion-btn .acc-title { font-family: var(--body); font-weight: 600; font-size: 15px; transition: color 0.2s; }
+  .accordion-btn .acc-meta  { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; margin-top: 3px; transition: color 0.2s; }
+  .accordion-btn.open .acc-title { color: var(--paper); }
+  .accordion-btn.open .acc-meta  { color: rgba(253,252,250,0.5); }
+  .accordion-btn .acc-icon  { font-family: var(--mono); font-size: 16px; color: var(--ink3); flex-shrink: 0; }
+  .accordion-btn.open .acc-icon { color: var(--paper); }
+  .accordion-body {
+    border: 1px solid var(--rule); border-top: none;
+    padding: 16px 18px; background: var(--paper);
+    display: none;
+  }
+  .accordion-body.open { display: block; }
+  .acc-intro { font-family: var(--body); font-style: italic; font-size: 13px; color: var(--ink2); line-height: 1.7; margin-bottom: 16px; }
+
+  /* ── SEGMENT BUTTONS ── */
+  .seg-btns { display: flex; gap: 8px; margin-bottom: 24px; }
+  .seg-btn {
+    background: transparent; border: 1px solid var(--rule);
+    color: var(--ink2); font-family: var(--mono); font-size: 11px;
+    letter-spacing: 2px; padding: 8px 20px; cursor: pointer;
+    text-transform: uppercase; transition: all 0.2s;
+  }
+  .seg-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .seg-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ── PROTEIN BAR ── */
+  .prog-bar { height: 6px; background: var(--rule); overflow: hidden; margin: 8px 0 4px; }
+  .prog-fill { height: 100%; transition: width 0.5s ease; }
+
+  /* ── MISC ── */
+  .dot-list-item { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+  .dot-list-item:last-child { border-bottom: none; }
+  .dot-circle { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .check-item  { display: flex; gap: 10px; padding: 5px 0; font-family: var(--body); font-size: 13px; color: var(--ink2); line-height: 1.6; }
+  .flash-item  { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); align-items: flex-start; }
+  .flash-icon  { font-size: 16px; flex-shrink: 0; color: var(--accent); line-height: 1; margin-top: 2px; }
+  .meal-time   { font-family: var(--mono); font-size: 10px; color: var(--ink3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+  .meal-food   { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+  .meal-note   { font-family: var(--body); font-style: italic; font-size: 12px; color: var(--ink2); }
+  strong.r { color: var(--ink); }
+  @media (max-width: 500px) {
+    .content { padding: 16px; }
+    .panel-header { padding: 24px 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-eyebrow">Personal Fitness Blueprint · Phase 1 of 3</div>
+  <h1 class="header-title">From Zero<br><em>to Athletic</em></h1>
+  <div class="header-sub">178 cm · 98 kg · 25 M · Indian Vegetarian · Gym Beginner</div>
+  <div class="header-tags">
+    <span class="header-tag accent">4 days / week</span>
+    <span class="header-tag">Phase 1 of 3</span>
+    <span class="header-tag gold">140g protein target</span>
+    <span class="header-tag">7.5 hrs sleep</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-tab="brief">Your Brief</button>
+    <button class="nav-btn" data-tab="schedule">Daily Schedule</button>
+    <button class="nav-btn" data-tab="program">12-Week Program</button>
+    <button class="nav-btn" data-tab="workouts">Workouts</button>
+    <button class="nav-btn" data-tab="nutrition">Nutrition</button>
+    <button class="nav-btn" data-tab="mobility">Mobility</button>
+    <button class="nav-btn" data-tab="mind">Mind &amp; Stress</button>
+    <button class="nav-btn" data-tab="milestones">Milestones</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     TAB 1 — YOUR BRIEF
+════════════════════════════════════════ -->
+<section class="panel active" id="tab-brief">
+  <div class="panel-header">
+    <div class="label">Diagnostic Report</div>
+    <h2 class="panel-title">What's Actually<br>Going On With You</h2>
+    <p class="panel-intro">Seven specific issues identified from your answers. Every one has a direct cause and a direct fix. Nothing here is permanent — all of it is correctable within months.</p>
+  </div>
+  <div class="content">
+    <div class="label">Problems to Fix</div>
+
+    <div class="card accent-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">01</div>
+        <div>
+          <div class="card-title">Visceral Fat Pattern <span class="tag accent">Priority</span></div>
+          <p class="card-sub" style="margin-bottom:10px">Belly + chest fat concentration is the cortisol signature. You said you're stressed but don't feel it — that's a blunted stress response. Cortisol is chronically elevated in the background, silently directing fat storage to the abdomen and chest.</p>
+          <span class="tag green">FIX: Stress management is a fat loss tool, not just wellness</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">02</div>
+        <div>
+          <div class="card-title">Hip Hike on Push-Up <span class="tag accent">Priority</span></div>
+          <p class="card-sub" style="margin-bottom:10px">When your hips rise during a push-up, your core has switched off and your lower back is compensating. This exact pattern maintains your lower back pain and will cause injury under barbells if not fixed first.</p>
+          <span class="tag green">FIX: Dead Bug and Hollow Body Hold — your priority exercises</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">03</div>
+        <div>
+          <div class="card-title">Anterior Pelvic Tilt <span class="tag accent">Priority</span></div>
+          <p class="card-sub" style="margin-bottom:10px">Lower back + pelvic stiffness is the classic desk-sitting posture problem. Hip flexors are shortened, glutes are switched off, lower back is overworking. This also causes the belly to protrude even beyond fat.</p>
+          <span class="tag green">FIX: Hip thrusts, RDLs, nightly hip flexor stretches. Daily.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent2-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">04</div>
+        <div>
+          <div class="card-title">Forward Head Posture <span class="tag accent2">Moderate</span></div>
+          <p class="card-sub" style="margin-bottom:10px">For every inch your head sits forward of your shoulders, your spine bears ~10 lbs of extra effective load. Your neck and shoulder tightness is the symptom. The cause is years of looking at screens.</p>
+          <span class="tag green">FIX: Chin tucks every morning. Face pulls in every workout.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent2-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">05</div>
+        <div>
+          <div class="card-title">Chai Timing Sabotage <span class="tag accent2">Moderate</span></div>
+          <p class="card-sub" style="margin-bottom:10px">2–3 chais daily with no cut-off time is almost certainly killing your sleep. Caffeine has a 6-hour half-life. Chai at 4 PM = 50% caffeine still active at 10 PM. Your inconsistent sleep has a chemical cause.</p>
+          <span class="tag green">FIX: Last chai before 1 PM. May transform sleep within a week.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent2-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">06</div>
+        <div>
+          <div class="card-title">Hidden Cortisol / Blunted Stress Response <span class="tag accent2">Moderate</span></div>
+          <p class="card-sub" style="margin-bottom:10px">Feeling numb to stress doesn't mean your body isn't responding. Your nervous system has adapted to constant low-level stress as its baseline. This suppresses recovery, motivation, and testosterone while elevating fat-storage hormones.</p>
+          <span class="tag green">FIX: Breathing protocols, sleep, and structured routine.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card accent2-top">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="big-num">07</div>
+        <div>
+          <div class="card-title">Core Weakness <span class="tag accent2">Moderate</span></div>
+          <p class="card-sub" style="margin-bottom:10px">You can do 10–15 push-ups but form breaks. Core stabilisation is absent. Without this, no gym exercise is as effective as it should be — your body leaks force through a weak centre.</p>
+          <span class="tag green">FIX: Fix this before adding weight. Dead bugs, planks, hollow holds first.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:32px">
+      <div class="label green">Your Unfair Advantages</div>
+      <div class="dot-list-item"><div class="dot-circle" style="background:var(--green)"></div><div><strong class="r">Gym is Walking Distance.</strong> <span style="color:var(--ink2)">Removes the single biggest barrier to consistency — commute friction. Most people quit because getting there feels like an obstacle. You have zero excuse, which is actually freeing.</span></div></div>
+      <div class="dot-list-item"><div class="dot-circle" style="background:var(--green)"></div><div><strong class="r">Student Schedule.</strong> <span style="color:var(--ink2)">Full control over your mornings. 6–9 AM workouts before the world wakes up is the most consistent training window that exists. No meetings, no lectures in the way.</span></div></div>
+      <div class="dot-list-item"><div class="dot-circle" style="background:var(--green)"></div><div><strong class="r">Early Morning Training.</strong> <span style="color:var(--ink2)">Morning training anchors the entire day and gives you an endorphin baseline that carries through your study sessions. Statistically, morning trainers are far more consistent.</span></div></div>
+      <div class="dot-list-item"><div class="dot-circle" style="background:var(--green)"></div><div><strong class="r">Beginner Gains.</strong> <span style="color:var(--ink2)">The first 3–6 months produce the fastest, most dramatic transformation of your entire fitness life. This is a once-in-a-lifetime window. Beginners see results advanced athletes spend years chasing.</span></div></div>
+      <div class="dot-list-item"><div class="dot-circle" style="background:var(--green)"></div><div><strong class="r">25 Years Old.</strong> <span style="color:var(--ink2)">Peak recovery rate. Testosterone, growth hormone, cellular repair — all at lifetime highs. The same stimulus that takes a 40-year-old months to recover from, you bounce back from in 48 hours.</span></div></div>
+    </div>
+
+    <blockquote class="pullquote">You are not fat and lazy. You are undertrained, underfuelled on protein, undersleeping, and carrying hidden stress. Every single one of these is fixable — and fixing one makes the others easier.</blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 2 — DAILY SCHEDULE
+════════════════════════════════════════ -->
+<section class="panel" id="tab-schedule">
+  <div class="panel-header">
+    <div class="label">Accountability Blueprint</div>
+    <h2 class="panel-title">Your Exact Daily<br>Schedule</h2>
+    <p class="panel-intro">You said you need strict times. Here they are. Screenshot this and follow it exactly. The schedule works because it leaves no decisions to willpower.</p>
+  </div>
+  <div class="content">
+    <div class="seg-btns">
+      <button class="seg-btn active" data-sched="gym">Gym Day</button>
+      <button class="seg-btn" data-sched="rest">Rest Day</button>
+    </div>
+
+    <div id="sched-gym">
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent2)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--accent2);flex-shrink:0">5:50 AM</span><span class="sched-task">Alarm goes off. No snooze.</span></div><p class="sched-detail">Set a second alarm at 5:52. Phone on the other side of the room. The snooze button is the enemy of morning training.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--blue);flex-shrink:0">6:00 AM</span><span class="sched-task">Morning activation (10 min)</span></div><p class="sched-detail">Before leaving home. Glute bridges 2×20 → Dead bug 2×8 each → Cat-cow 10 reps → Chin tucks 3×15. Switches on your glutes and core before the gym asks them to work.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#7A5F2A"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:#7A5F2A;flex-shrink:0">6:12 AM</span><span class="sched-task">Walk to gym (under 10 min)</span></div><p class="sched-detail">This IS your warmup walk. Arrive calm, not rushed. The walk primes blood flow to your legs.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--accent);flex-shrink:0">6:20 AM</span><span class="sched-task">Gym — 5 min cardio warmup</span></div><p class="sched-detail">Treadmill at brisk walk, incline 3. Raises body temperature, loosens joints, wakes up the cardiovascular system.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--accent);flex-shrink:0">6:25 AM</span><span class="sched-task">Main workout (45–55 min)</span></div><p class="sched-detail">Follow the day's program exactly. Log every set and weight in a notes app. Rest 60–75 sec between sets. Never scroll your phone during rest — stay present.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--accent);flex-shrink:0">7:20 AM</span><span class="sched-task">10 min cardio finisher</span></div><p class="sched-detail">Incline treadmill walk or stationary bike. Easy pace. Active cool-down that also builds your stamina base week by week.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#7A5F2A"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:#7A5F2A;flex-shrink:0">7:35 AM</span><span class="sched-task">Walk home + shower</span></div><p class="sched-detail">Don't sit before showering. Momentum matters — sitting down after the gym is a habit that stalls the morning.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">8:00 AM</span><span class="sched-task">Post-workout breakfast</span></div><p class="sched-detail">Within 60 min of training. Sattu drink or milk + banana first. Then proper meal: rotis + sabzi + dahi. Protein-first mindset.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--ink2)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--ink2);flex-shrink:0">9:00 AM</span><span class="sched-task">Deep study / work block</span></div><p class="sched-detail">You have an endorphin and blood flow advantage right now that non-exercisers never experience. Use it for your hardest cognitive work.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">12:30 PM</span><span class="sched-task">Last chai of the day — non-negotiable</span></div><p class="sched-detail">Maximum. Not one cup after this. Caffeine cut-off. This is the single most impactful change for your sleep quality.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">1:00 PM</span><span class="sched-task">Lunch — protein first</span></div><p class="sched-detail">Soya chunk sabzi or rajma + 2 rotis + salad + curd. Your biggest protein meal. Half the plate should be the protein source, not rice.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">4:00 PM</span><span class="sched-task">Afternoon snack</span></div><p class="sched-detail">Chana chaat, peanut butter roti, or roasted chana. Prevents binge eating at dinner. This snack also replaces the chai craving.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">8:00 PM</span><span class="sched-task">Dinner — 2 hours before sleep</span></div><p class="sched-detail">Dal + roti + sabzi + curd. Finish completely by 8:30 PM. No eating after this. Digestion raises body temperature, which fights sleep onset.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--blue);flex-shrink:0">9:30 PM</span><span class="sched-task">Screens off. Night mobility (12 min)</span></div><p class="sched-detail">Do the full night routine from the Mobility tab. This is your decompression and posture fix in one. No phone in this window.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#5A4A8A"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:#5A4A8A;flex-shrink:0">10:00 PM</span><span class="sched-task">In bed. Lights off.</span></div><p class="sched-detail">7.5 hrs before the 5:50 AM alarm. If mind races, use box breathing: 4 counts in, 4 hold, 4 out, 4 hold. Repeat 5 times.</p></div></div>
+    </div>
+
+    <div id="sched-rest" style="display:none">
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent2)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--accent2);flex-shrink:0">7:00 AM</span><span class="sched-task">Wake up — same time as gym days</span></div><p class="sched-detail">Your circadian rhythm is set by wake time, not sleep time. Sleeping in on rest days destroys your rhythm and makes gym mornings harder.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--blue);flex-shrink:0">7:15 AM</span><span class="sched-task">Morning mobility (12 min)</span></div><p class="sched-detail">Same as gym day. Glute bridges → dead bug → cat-cow → chin tucks. Non-negotiable on rest days too.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">8:00 AM</span><span class="sched-task">Breakfast — protein first</span></div><p class="sched-detail">Same protein-first meal. Your muscles are still recovering and need amino acids even on rest days.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#7A5F2A"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:#7A5F2A;flex-shrink:0">10:00 AM</span><span class="sched-task">30 min walk outdoors</span></div><p class="sched-detail">Active recovery. Not a workout — just movement. Walk at a comfortable conversational pace. Natural light improves your sleep quality tonight.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">1:00 PM</span><span class="sched-task">Lunch</span></div><p class="sched-detail">Same as gym day. Don't reduce protein on rest days — this is actually when muscle synthesis is happening most actively.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--ink2)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--ink2);flex-shrink:0">4:00 PM</span><span class="sched-task">Snack + study</span></div><p class="sched-detail">Rest days are your deep study days. Use the extra energy well.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--green);flex-shrink:0">7:30 PM</span><span class="sched-task">Dinner — slightly earlier</span></div><p class="sched-detail">Can eat a little earlier since you didn't train. More time for digestion before sleep.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:var(--blue);flex-shrink:0">8:30 PM</span><span class="sched-task">Full night mobility (20 min)</span></div><p class="sched-detail">Spend more time on mobility on rest days. Every stretch from the Mobility tab. This is where your posture is actually repaired.</p></div></div>
+      <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#5A4A8A"></div></div><div class="timeline-body"><div style="display:flex;gap:12px;align-items:baseline;margin-bottom:4px"><span class="sched-time" style="color:#5A4A8A;flex-shrink:0">10:00 PM</span><span class="sched-task">Sleep — same time as gym days</span></div><p class="sched-detail">Consistency is everything. Your body clock resets by having a fixed wake AND sleep time.</p></div></div>
+    </div>
+
+    <div class="card ink-top" style="margin-top:24px">
+      <div class="label">Accountability System</div>
+      <p style="font-family:var(--body);font-size:13px;color:var(--ink2);line-height:1.8">
+        <strong class="r">1. Pick one accountability person.</strong> Not a group chat. One specific person. Tell them your schedule. Send them a gym-entrance photo every session. This costs 5 seconds and creates powerful social commitment.<br><br>
+        <strong class="r">2. The night-before rule.</strong> Every evening, write tomorrow's workout in a notes app. Choose your weights. This removes the morning decision that willpower would otherwise have to make.<br><br>
+        <strong class="r">3. Track streaks.</strong> A streak of 3 consistent weeks beats one perfect week followed by abandonment. If you miss a session, the only rule is: never miss two in a row.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 3 — 12-WEEK PROGRAM
+════════════════════════════════════════ -->
+<section class="panel" id="tab-program">
+  <div class="panel-header">
+    <div class="label">Phase 1 of 3</div>
+    <h2 class="panel-title">12-Week Foundation<br>Program</h2>
+    <p class="panel-intro">Each week has a specific intention. Deload weeks are mandatory — they are where adaptation is locked in. Never skip them.</p>
+  </div>
+  <div class="content">
+    <div class="week-grid" id="week-grid"></div>
+    <div id="week-detail"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 4 — WORKOUTS
+════════════════════════════════════════ -->
+<section class="panel" id="tab-workouts">
+  <div class="panel-header">
+    <div class="label">Upper / Lower Split</div>
+    <h2 class="panel-title">Your 4-Day<br>Workout Program</h2>
+    <p class="panel-intro">Every exercise is here for a specific reason relating to your body. Read the form cues carefully — for a beginner, form is everything.</p>
+  </div>
+  <div class="content" style="padding-bottom:0">
+    <div class="day-tabs" id="day-tabs"></div>
+  </div>
+  <div class="content" id="day-detail"></div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 5 — NUTRITION
+════════════════════════════════════════ -->
+<section class="panel" id="tab-nutrition">
+  <div class="panel-header">
+    <div class="label">Indian Vegetarian Protocol</div>
+    <h2 class="panel-title">Nutrition for<br>Body Recomposition</h2>
+    <p class="panel-intro">Your standard Indian meals are excellent food. They just need one change: a protein source at every meal, not just dal at dinner.</p>
+  </div>
+  <div class="content">
+    <div class="card accent-top">
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+        <div><div class="label muted" style="margin-bottom:4px">Current intake</div><div style="font-family:var(--display);font-size:32px;font-weight:900;color:#EF4444">~50g</div><div style="font-family:var(--mono);font-size:10px;color:var(--ink3)">protein / day</div></div>
+        <div style="text-align:right"><div class="label muted" style="margin-bottom:4px">Your target</div><div style="font-family:var(--display);font-size:32px;font-weight:900;color:var(--green)">130–150g</div><div style="font-family:var(--mono);font-size:10px;color:var(--ink3)">protein / day</div></div>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" style="width:35%;background:#EF4444"></div></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:4px">You need to nearly triple your protein. This is the single most important dietary change.</div>
+    </div>
+
+    <div style="margin-top:28px"><div class="label">Best Protein Sources — Ranked</div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">1</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">⭐ Soya Chunks (dry)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Cheapest, highest-protein food in India. Add to every curry. Hydrate for 20 min in hot water first.</div><span class="tag green">52g protein per 100g dry</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">2</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Sattu (Roasted Chana Flour)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Indian superfood. Mix with water + lemon + rock salt. Best cheap post-workout drink available in India.</div><span class="tag green">10g protein per 30g</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">3</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Paneer</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Versatile. Add to sabzi, eat plain with spices, in salads. High fat too — keep portions sensible.</div><span class="tag green">18g protein per 100g</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">4</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Chana / Rajma (cooked)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Make this your rice replacement. Legumes at every meal. Chana dal, rajma, chole — all excellent.</div><span class="tag green">15g protein per cup</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">5</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Dahi (plain curd)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Have daily. Gut health + protein. Unsweetened only. Greek-style if available.</div><span class="tag green">10g protein per cup</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--rule);align-items:flex-start"><div class="big-num">6</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Milk (whole)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">Pre-bed or post-workout. Casein digests slowly — feeds muscles throughout the night.</div><span class="tag green">8g protein per glass</span></div></div>
+      <div style="display:flex;gap:14px;padding:12px 0;align-items:flex-start"><div class="big-num">7</div><div style="flex:1"><div style="font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);margin-bottom:3px">Peanut Butter (plain)</div><div style="font-family:var(--body);font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:6px">No added sugar variety. Cheap, calorie-dense. Great pre-workout snack base.</div><span class="tag green">8g protein per 2 tbsp</span></div></div>
+    </div>
+
+    <div style="margin-top:32px"><div class="label">Daily Meal Plan</div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:2px solid var(--ink)"><span style="font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:1px;text-transform:uppercase">Meal</span><div style="display:flex;gap:24px"><span style="font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:1px">PROTEIN</span><span style="font-family:var(--mono);font-size:10px;color:var(--ink3);letter-spacing:1px">KCAL</span></div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">8:00 AM — Post-Workout Breakfast</div><div class="meal-food">Sattu drink + 2 rotis + sabzi + 1 cup dahi</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">38g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">520</div></div></div><div class="meal-note">Sattu first within 10 min of gym. Main breakfast 30 min later.</div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">11:00 AM — Mid-Morning</div><div class="meal-food">1 glass milk + handful roasted chana (30g)</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">15g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">220</div></div></div><div class="meal-note">Prevents energy dip before lunch. Don't skip.</div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">1:00 PM — Lunch</div><div class="meal-food">1 cup soya chunk sabzi + 2 rotis + salad + lassi</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">42g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">580</div></div></div><div class="meal-note">Last chai here. Soya chunks are your lunch staple. Replace half your rice with dal.</div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">4:30 PM — Evening Snack</div><div class="meal-food">Chana chaat OR peanut butter on 1 roti</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">12g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">220</div></div></div><div class="meal-note">No chai after 1 PM. This snack with water replaces the chai craving.</div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">8:00 PM — Dinner</div><div class="meal-food">Thick moong/chana dal + 1–2 rotis + paneer sabzi + curd</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">40g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">560</div></div></div><div class="meal-note">Biggest meal. Finish by 8:30 PM maximum.</div></div>
+      <div style="border-bottom:1px solid var(--rule);padding:12px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="meal-time">10:00 PM — Optional</div><div class="meal-food">1 glass warm milk</div></div><div style="text-align:right;flex-shrink:0;margin-left:12px"><div style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">8g</div><div style="font-family:var(--mono);font-size:11px;color:var(--ink3)">120</div></div></div><div class="meal-note">Casein protein works overnight. Only if not full from dinner.</div></div>
+      <div style="display:flex;justify-content:space-between;padding:14px 0;border-top:2px solid var(--ink)"><span style="font-family:var(--mono);font-size:11px;color:var(--ink);font-weight:500;letter-spacing:1px;text-transform:uppercase">Daily Total</span><div style="display:flex;gap:28px"><span style="font-family:var(--mono);font-size:13px;color:var(--green);font-weight:500">155g</span><span style="font-family:var(--mono);font-size:13px;color:var(--ink)">2,220</span></div></div>
+    </div>
+    <blockquote class="pullquote accent2">Chai rule: last cup before 1 PM, maximum 2 cups daily. After that — water, nimbu paani, or sparkling water. This single change may transform your sleep within one week.</blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 6 — MOBILITY
+════════════════════════════════════════ -->
+<section class="panel" id="tab-mobility">
+  <div class="panel-header">
+    <div class="label">Posture Correction System</div>
+    <h2 class="panel-title">Three Mobility<br>Routines</h2>
+    <p class="panel-intro">The night routine is non-negotiable. Within 3 weeks of doing it consistently, your lower back stiffness will be dramatically reduced. This is where posture is actually fixed.</p>
+  </div>
+  <div class="content" id="mobility-content"></div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 7 — MIND & STRESS
+════════════════════════════════════════ -->
+<section class="panel" id="tab-mind">
+  <div class="panel-header">
+    <div class="label">The Hidden Variable</div>
+    <h2 class="panel-title">Mind, Stress<br>&amp; Accountability</h2>
+    <p class="panel-intro">You said you're stressed but don't feel it. That's the most dangerous kind — your body is responding even when your mind has adapted. Here's how to address it practically.</p>
+  </div>
+  <div class="content">
+    <blockquote class="pullquote">The belly fat that won't shift, the low energy that sleep doesn't fix, the motivation that comes and goes — these are often cortisol problems, not effort problems.</blockquote>
+
+    <div class="card blue-top">
+      <span class="tag blue">Before bed or when overwhelmed</span>
+      <h3 style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin:10px 0 8px">Box Breathing (4-4-4-4)</h3>
+      <div class="check-item"><span style="color:var(--blue);flex-shrink:0">▸</span>Inhale through nose — 4 slow counts</div>
+      <div class="check-item"><span style="color:var(--blue);flex-shrink:0">▸</span>Hold breath — 4 counts</div>
+      <div class="check-item"><span style="color:var(--blue);flex-shrink:0">▸</span>Exhale through mouth — 4 counts</div>
+      <div class="check-item"><span style="color:var(--blue);flex-shrink:0">▸</span>Hold empty — 4 counts</div>
+      <div class="check-item"><span style="color:var(--blue);flex-shrink:0">▸</span>Repeat 4–6 cycles (about 2 minutes total)</div>
+      <hr class="rule" style="margin-top:14px">
+      <p style="font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.7">Directly activates your parasympathetic nervous system. Measurably lowers cortisol within minutes. This is the most evidence-backed stress tool available. Naval commandos use it before high-stress operations.</p>
+    </div>
+
+    <div class="card green-top">
+      <span class="tag green">Every night before mobility</span>
+      <h3 style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin:10px 0 8px">Two-Minute Journaling</h3>
+      <div class="check-item"><span style="color:var(--green);flex-shrink:0">▸</span>Write 1 thing you did well today</div>
+      <div class="check-item"><span style="color:var(--green);flex-shrink:0">▸</span>Write 1 thing you'll do tomorrow</div>
+      <div class="check-item"><span style="color:var(--green);flex-shrink:0">▸</span>Write energy level today (out of 10)</div>
+      <div class="check-item"><span style="color:var(--green);flex-shrink:0">▸</span>Close and sleep</div>
+      <hr class="rule" style="margin-top:14px">
+      <p style="font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.7">Provides self-monitoring that replaces having an external coach. People who track subjectively are significantly more consistent. It also builds awareness of stress, sleep, and energy patterns over time.</p>
+    </div>
+
+    <div class="card accent-top">
+      <span class="tag accent">Ongoing — build this in permanently</span>
+      <h3 style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin:10px 0 8px">The Burnout Prevention Protocol</h3>
+      <div class="check-item"><span style="color:var(--accent);flex-shrink:0">▸</span>Hard cap: never train more than 5 days/week, ever</div>
+      <div class="check-item"><span style="color:var(--accent);flex-shrink:0">▸</span>If energy is below 4/10 two days in a row: take an extra rest day</div>
+      <div class="check-item"><span style="color:var(--accent);flex-shrink:0">▸</span>If you miss 3+ days: restart at Week 1 weights, not where you left off</div>
+      <div class="check-item"><span style="color:var(--accent);flex-shrink:0">▸</span>Every 6 weeks: one full week of only walking</div>
+      <div class="check-item"><span style="color:var(--accent);flex-shrink:0">▸</span>Never chase a missed day — it's gone. Move forward only.</div>
+      <hr class="rule" style="margin-top:14px">
+      <p style="font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.7">You described an obsessive-then-burnout pattern. This protocol replaces motivation with structure. When the rules are clear, your brain stops having to decide — and decision fatigue is what creates the all-or-nothing spiral.</p>
+    </div>
+
+    <div class="card accent2-top">
+      <span class="tag accent2">Understand this — it changes everything</span>
+      <h3 style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin:10px 0 8px">The Hidden Cortisol Problem</h3>
+      <div class="check-item"><span style="color:var(--accent2);flex-shrink:0">▸</span>Your belly fat pattern is a cortisol signature, not just a calorie issue</div>
+      <div class="check-item"><span style="color:var(--accent2);flex-shrink:0">▸</span>Chronic low-level stress suppresses testosterone and growth hormone</div>
+      <div class="check-item"><span style="color:var(--accent2);flex-shrink:0">▸</span>You cannot out-train a chronically elevated cortisol environment</div>
+      <div class="check-item"><span style="color:var(--accent2);flex-shrink:0">▸</span>Sleep, breathing, and avoiding overtraining are your cortisol tools</div>
+      <div class="check-item"><span style="color:var(--accent2);flex-shrink:0">▸</span>Cutting chai after 1 PM alone measurably improves your cortisol rhythm</div>
+      <hr class="rule" style="margin-top:14px">
+      <p style="font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.7">Most fitness advice ignores the hormonal environment entirely. Your body's response to training is mediated by your hormonal state. Stress management is not optional — it is foundational to everything else in this plan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TAB 8 — MILESTONES
+════════════════════════════════════════ -->
+<section class="panel" id="tab-milestones">
+  <div class="panel-header">
+    <div class="label">Your Transformation Map</div>
+    <h2 class="panel-title">Milestones &amp;<br>Benchmarks</h2>
+    <p class="panel-intro">What to realistically expect, and when. These are conservative estimates. Nail your sleep and protein and you'll beat them.</p>
+  </div>
+  <div class="content">
+    <div class="label">Transformation Timeline</div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Week 2</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">First Wins</div><div class="check-item"><span style="color:var(--blue)">✓</span>Gym no longer feels foreign or scary</div><div class="check-item"><span style="color:var(--blue)">✓</span>First DOMS (muscle soreness) — means it's working</div><div class="check-item"><span style="color:var(--blue)">✓</span>Back stiffness slightly improved from nightly mobility</div><div class="check-item"><span style="color:var(--blue)">✓</span>Sleeping 15 min earlier than when you started</div></div></div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--blue)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Week 4</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">Habit Formed</div><div class="check-item"><span style="color:var(--blue)">✓</span>Morning gym is on autopilot — no longer a decision</div><div class="check-item"><span style="color:var(--blue)">✓</span>Posture noticeably better — you'll feel it first</div><div class="check-item"><span style="color:var(--blue)">✓</span>Lower back pain reduced significantly</div><div class="check-item"><span style="color:var(--blue)">✓</span>1–2 kg body composition change</div><div class="check-item"><span style="color:var(--blue)">✓</span>Push-up hip hike corrected</div></div></div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent2)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Month 2</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">Visible Changes</div><div class="check-item"><span style="color:var(--accent2)">✓</span>Clothes fitting differently around the waist</div><div class="check-item"><span style="color:var(--accent2)">✓</span>3–5 kg total body composition change</div><div class="check-item"><span style="color:var(--accent2)">✓</span>Shoulder and neck tightness largely gone</div><div class="check-item"><span style="color:var(--accent2)">✓</span>25 min cardio feels comfortable</div><div class="check-item"><span style="color:var(--accent2)">✓</span>Family and friends start noticing</div></div></div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--accent)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Month 3</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">Foundation Complete</div><div class="check-item"><span style="color:var(--accent)">✓</span>5–8 kg total body recomposition</div><div class="check-item"><span style="color:var(--accent)">✓</span>Visible muscle definition beginning to emerge</div><div class="check-item"><span style="color:var(--accent)">✓</span>Gym is identity, not effort</div><div class="check-item"><span style="color:var(--accent)">✓</span>Can jog for intervals, 30+ min cardio</div><div class="check-item"><span style="color:var(--accent)">✓</span>Lower back pain: gone or near-gone</div></div></div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:var(--green)"></div><div class="timeline-line"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Month 6</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">Athletic Shape</div><div class="check-item"><span style="color:var(--green)">✓</span>Body recomposition visibly striking to everyone</div><div class="check-item"><span style="color:var(--green)">✓</span>Can run 3–5K continuously</div><div class="check-item"><span style="color:var(--green)">✓</span>Full mobility in all joints</div><div class="check-item"><span style="color:var(--green)">✓</span>Athletic, capable physique taking clear shape</div><div class="check-item"><span style="color:var(--green)">✓</span>Energy levels transformed</div></div></div>
+
+    <div class="timeline-item"><div class="timeline-spine"><div class="timeline-dot" style="background:#7A4FA8"></div></div><div class="timeline-body"><div style="font-family:var(--mono);font-size:10px;color:#7A4FA8;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Month 12</div><div style="font-family:var(--display);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px">New Person</div><div class="check-item"><span style="color:#7A4FA8">✓</span>Athletic, pleasing physique fully achieved</div><div class="check-item"><span style="color:#7A4FA8">✓</span>Can run 5–10K</div><div class="check-item"><span style="color:#7A4FA8">✓</span>Pull-ups possible</div><div class="check-item"><span style="color:#7A4FA8">✓</span>1.5× bodyweight squat</div><div class="check-item"><span style="color:#7A4FA8">✓</span>Fitness is who you are, not what you do</div></div></div>
+
+    <hr class="rule" style="margin:28px 0">
+    <div class="label">Strength &amp; Performance Benchmarks</div>
+    <div style="overflow-x:auto">
+      <table class="data-table">
+        <thead><tr><th>Exercise</th><th>Week 4</th><th style="color:var(--accent)">Month 3</th><th style="color:var(--accent2)">Month 6</th><th style="color:var(--green)">Month 12</th></tr></thead>
+        <tbody>
+          <tr><td>Push-ups (full form)</td><td class="m" style="color:var(--ink3)">10–15</td><td class="m" style="color:var(--accent)">25+</td><td class="m" style="color:var(--accent2)">40+</td><td class="m" style="color:var(--green)">50+</td></tr>
+          <tr><td>Plank hold</td><td class="m" style="color:var(--ink3)">45 sec</td><td class="m" style="color:var(--accent)">2 min</td><td class="m" style="color:var(--accent2)">3.5 min</td><td class="m" style="color:var(--green)">5 min</td></tr>
+          <tr><td>Goblet / Barbell Squat</td><td class="m" style="color:var(--ink3)">10 kg</td><td class="m" style="color:var(--accent)">40 kg</td><td class="m" style="color:var(--accent2)">65 kg</td><td class="m" style="color:var(--green)">90 kg</td></tr>
+          <tr><td>Lat Pulldown</td><td class="m" style="color:var(--ink3)">25 kg</td><td class="m" style="color:var(--accent)">50 kg</td><td class="m" style="color:var(--accent2)">70 kg</td><td class="m" style="color:var(--green)">90 kg</td></tr>
+          <tr><td>Hip Thrust</td><td class="m" style="color:var(--ink3)">BW only</td><td class="m" style="color:var(--accent)">60 kg</td><td class="m" style="color:var(--accent2)">100 kg</td><td class="m" style="color:var(--green)">130 kg</td></tr>
+          <tr><td>Romanian Deadlift</td><td class="m" style="color:var(--ink3)">20 kg</td><td class="m" style="color:var(--accent)">50 kg</td><td class="m" style="color:var(--accent2)">75 kg</td><td class="m" style="color:var(--green)">100 kg</td></tr>
+          <tr><td>Running</td><td class="m" style="color:var(--ink3)">15 min walk</td><td class="m" style="color:var(--accent)">20 min jog</td><td class="m" style="color:var(--accent2)">5K run</td><td class="m" style="color:var(--green)">10K run</td></tr>
+          <tr><td>Body weight</td><td class="m" style="color:var(--ink3)">95–96 kg</td><td class="m" style="color:var(--accent)">90–92 kg</td><td class="m" style="color:var(--accent2)">84–87 kg</td><td class="m" style="color:var(--green)">78–82 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card ink-top" style="margin-top:28px">
+      <div class="label">The Six Rules You Never Break</div>
+      <div class="flash-item"><span class="flash-icon">⚡</span><div><strong class="r">Never miss Monday.</strong> <span style="color:var(--ink2)">Monday sets the week's tone. One missed Monday cascades into a missed week.</span></div></div>
+      <div class="flash-item"><span class="flash-icon">⚡</span><div><strong class="r">Last chai before 1 PM.</strong> <span style="color:var(--ink2)">Your sleep depends on it. Your sleep determines everything else.</span></div></div>
+      <div class="flash-item"><span class="flash-icon">⚡</span><div><strong class="r">Protein at every meal.</strong> <span style="color:var(--ink2)">Without this, you are training for nothing. Muscle needs amino acids to be built.</span></div></div>
+      <div class="flash-item"><span class="flash-icon">⚡</span><div><strong class="r">Mobility every night.</strong> <span style="color:var(--ink2)">Your posture will never fix itself otherwise. 12 minutes. Every night.</span></div></div>
+      <div class="flash-item"><span class="flash-icon">⚡</span><div><strong class="r">Log every workout.</strong> <span style="color:var(--ink2)">Progressive overload only works if you know what you lifted last week.</span></div></div>
+      <div class="flash-item" style="border-bottom:none"><span class="flash-icon">⚡</span><div><strong class="r">Sleep 7.5 hours.</strong> <span style="color:var(--ink2)">Not a wellness suggestion. A medical requirement for your goals.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ═══════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ═══════════════════════════════════
+// SCHEDULE TOGGLE
+// ═══════════════════════════════════
+document.querySelectorAll('.seg-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const v = btn.dataset.sched;
+    document.getElementById('sched-gym').style.display = v === 'gym' ? 'block' : 'none';
+    document.getElementById('sched-rest').style.display = v === 'rest' ? 'block' : 'none';
+  });
+});
+
+// ═══════════════════════════════════
+// 12-WEEK PROGRAM DATA
+// ═══════════════════════════════════
+const weeks = [
+  { w:1,  phase:'Foundation', pc:'blue',    title:'Learn the Gym',          focus:'Orientation & comfort',              days:'Mon · Tue · Thu · Fri', key:['Treadmill 15 min + 2 machines + plank only','Ask gym staff to show you machines — that is their job','Go at the same time every day. Habit formation is the goal.','Start night mobility routine — tonight.','Chai cut-off: 1 PM from today. No exceptions.'], note:'Cap workouts at 45 min. Leave wanting more. Seriously.' },
+  { w:2,  phase:'Foundation', pc:'blue',    title:'Learn All Movements',    focus:'Form over everything',               days:'Mon · Tue · Thu · Fri', key:['Begin the Upper/Lower split loosely','Very light weights — form is the only goal right now','Log every exercise and weight used in a notes app','Walk 20 min on rest days','Sleep target: aim for 7 hrs this week'], note:'If you are sore, you are doing enough. Do not add more volume.' },
+  { w:3,  phase:'Foundation', pc:'blue',    title:'Follow the Program',     focus:'Establish the habit loop',           days:'Mon · Tue · Thu · Fri', key:['Full Day 1 / 2 / 4 / 5 as written — no shortcuts','Strict 60-sec rest between sets','Core work every session without exception','8,000 steps on rest days','Film yourself doing a plank — check for hip hike'], note:'Still no extra sessions. 4 days IS the complete program.' },
+  { w:4,  phase:'Foundation', pc:'blue',    title:'Progressive Overload I', focus:'Add load systematically',            days:'Mon · Tue · Thu · Fri', key:['+2.5–5 kg on compound exercises from Week 3','Same weight if form breaks — never compromise form for load','Cardio: +5 minutes per session','Track bodyweight every Monday morning only','Sleep is still your most important performance variable'], note:'One hard week, then deload. Just focus on this week.' },
+  { w:5,  phase:'Foundation', pc:'blue',    title:'Intensity Up',           focus:'Reduce rest, increase demand',       days:'Mon · Tue · Thu · Fri', key:['Rest between sets: 60 sec (down from 75 sec)','This will feel harder — that is the exact point','Add stationary bike: 15 min on 2 rest days','Begin incline treadmill: level 5','Track protein every meal this week — just this week'], note:'Schedule your rest days. Mark them in your calendar.' },
+  { w:6,  phase:'Deload',     pc:'green',   title:'Recovery Week',          focus:'Consolidate, not coast',             days:'Mon · Tue · Thu · Fri', key:['80% of Week 5 weights — not less, not more','2 sets instead of 3 on all exercises','Extra 10 min mobility every day this week','Sleep 8+ hrs every night — treat it as medicine','Reflect honestly: what is working? What is hard?'], note:'Deload is not weakness. It IS training. Miss it and plateau.' },
+  { w:7,  phase:'Build',      pc:'accent',  title:'Personal Records',       focus:'Strength peak after deload',         days:'Mon · Tue · Thu · Fri', key:['Expect to hit new personal records this week — deload rebounds are real','Use the momentum from Week 6 recovery','Cardio: 25 min sessions now','Introduce Romanian Deadlift if not already in your program','Hip hike should be mostly gone by now — recheck form'], note:'Record your best lifts. These become your new baseline.' },
+  { w:8,  phase:'Build',      pc:'accent',  title:'Cardio Expansion',       focus:'Stamina becomes the priority',       days:'Mon · Tue · Thu · Fri', key:['Incline treadmill: level 6–8 now','Introduce jog intervals: 1 min jog / 2 min walk × 5','Strength: +5% load across all lifts','Core: add hanging knee raises to pull day','Begin weekly waist measurement — track changes'], note:'Do not add a 5th gym day no matter how good you feel.' },
+  { w:9,  phase:'Build',      pc:'accent',  title:'Compound Strength',      focus:'Learn the big lifts',                days:'Mon · Tue · Thu · Fri', key:['Introduce barbell squat — empty bar first, 3 sets form work only','Conventional deadlift — same, form only, no weight yet','Watch Alan Thrall deadlift tutorial before your first session','4 sets on main compound exercises','Jog intervals: 2 min jog / 2 min walk × 4'], note:'Barbell lifts with bad form will injure you. Ego is your enemy.' },
+  { w:10, phase:'Build',      pc:'accent',  title:'Volume Phase',           focus:'More total work = more muscle',      days:'Mon · Tue · Thu · Fri', key:['4 sets on all exercises this week','Squat and deadlift: add load only if form was clean in Week 9','Jog intervals: 3 min jog / 90 sec walk','Cardio: 3 days × 30 min minimum','Protein: are you hitting 130g? Track honestly for 3 days'], note:'You are 10 weeks in. The urge to add days will be strong. Resist.' },
+  { w:11, phase:'Deload',     pc:'green',   title:'Recovery Week II',       focus:'Prepare body for the final push',    days:'Mon · Tue · Thu · Fri', key:['80% weight, 2 sets — same as Week 6','Light jogging only for cardio','Sleep 8+ hrs every single night this week','Full mobility sessions daily — spend more time than usual','Visualise the 12-week photo comparison you will do next week'], note:'Second deload. Even more important than the first. Do not skip it.' },
+  { w:12, phase:'Milestone',  pc:'purple',  title:'Foundation Complete',    focus:'Test, measure, celebrate',           days:'Mon · Tue · Thu · Fri', key:['Attempt personal records on all main lifts','Full body measurements: waist, chest, arms, thighs, weight','Progress photos — same lighting, same time of day as Week 1','Write down what changed beyond the body — how do you feel?','Plan Phase 2 — consider getting a trainer for Phase 2 coaching'], note:'You did it. 12 weeks. That puts you in the top 5% of people who start.' },
+];
+
+const phaseColors = { blue:'var(--blue)', green:'var(--green)', accent:'var(--accent)', purple:'#7A4FA8' };
+
+function renderWeeks() {
+  const grid = document.getElementById('week-grid');
+  weeks.forEach(w => {
+    const btn = document.createElement('button');
+    btn.className = 'week-btn' + (w.phase === 'Deload' ? ' deload' : w.phase === 'Milestone' ? ' milestone' : '');
+    btn.textContent = w.w;
+    btn.dataset.week = w.w;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderWeekDetail(w.w);
+    });
+    grid.appendChild(btn);
+  });
+  document.querySelector('.week-btn').classList.add('active');
+  renderWeekDetail(1);
+}
+
+function renderWeekDetail(n) {
+  const w = weeks.find(x => x.w === n);
+  const c = phaseColors[w.pc];
+  document.getElementById('week-detail').innerHTML = `
+    <div class="card" style="border-left:3px solid ${c};margin-bottom:0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div><span class="tag ${w.pc}">${w.phase}</span><span class="tag muted">Week ${w.w} / 12</span></div>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--ink3)">${w.days}</span>
+      </div>
+      <h3 style="font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:4px">${w.title}</h3>
+      <div style="font-family:var(--body);font-style:italic;color:var(--ink2);font-size:14px;margin-bottom:18px">${w.focus}</div>
+      <hr class="rule">
+      <div class="label muted" style="margin-bottom:12px">This Week's Priorities</div>
+      ${w.key.map(k => `<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule)"><div style="width:5px;height:5px;border-radius:50%;background:${c};margin-top:8px;flex-shrink:0"></div><span style="font-family:var(--body);font-size:13px;color:var(--ink2);line-height:1.6">${k}</span></div>`).join('')}
+      <blockquote class="pullquote" style="border-left-color:${c};margin-top:20px;margin-bottom:0">${w.note}</blockquote>
+    </div>`;
+}
+
+renderWeeks();
+
+// ═══════════════════════════════════
+// WORKOUTS DATA
+// ═══════════════════════════════════
+const days = [
+  {
+    label:'Day 1', sub:'Upper — Push', when:'Monday',
+    intent:'Chest, shoulders, triceps. Face pulls directly fix your shoulder tightness. Every session, without exception.',
+    warmup:'5 min treadmill walk (incline 2) → Arm circles 10 fwd/back → Band pull-aparts 20 reps',
+    exercises:[
+      { name:'Incline Dumbbell Press', sets:'3', reps:'12', rest:'75 sec', target:'Upper chest + front deltoids', priority:false, cue:'Elbows at 45° — not flared out like a T. Feel the upper chest at the bottom of the movement. Press up and slightly inward, not straight up. Start with 8–10 kg dumbbells.' },
+      { name:'Seated Dumbbell Shoulder Press', sets:'3', reps:'12', rest:'75 sec', target:'Deltoids, triceps', priority:false, cue:'Sit completely upright. No lower back arch. Lower to ear level, not behind the head. Press overhead without slamming the elbows into extension.' },
+      { name:'Cable Chest Fly', sets:'3', reps:'15', rest:'60 sec', target:'Chest isolation + stretch', priority:false, cue:'Light weight only. Arms slightly bent throughout. Imagine hugging a large barrel. Slow controlled return — don\'t let the weight snap you back.' },
+      { name:'Tricep Pushdown (Cable)', sets:'3', reps:'15', rest:'60 sec', target:'Triceps, arm size', priority:false, cue:'Elbows pinned to sides the entire movement — only forearms move. Fully extend at the bottom. Common mistake: leaning forward and turning it into a shoulder exercise.' },
+      { name:'Face Pulls (Cable)', sets:'3', reps:'20', rest:'60 sec', target:'Rear delts + rotator cuff — posture fix', priority:true, cue:'PRIORITY. Set cable at forehead height. Pull handles to your forehead, elbows flaring wide. Think: trying to show your armpits. Very light weight — this is corrective work, not strength work. Directly fixes your shoulder and neck tightness.' },
+      { name:'Plank', sets:'3', reps:'Max hold', rest:'60 sec', target:'Core anti-extension — hip hike fix', priority:true, cue:'Elbows under shoulders. Squeeze abs, glutes, and quads simultaneously. Do NOT let hips rise — that is your push-up problem and it will injure your lower back under load. Stop when form breaks, even if it\'s 15 seconds. Quality over duration.' },
+    ],
+    cardio:'10 min incline treadmill walk (level 4), comfortable conversation pace',
+    cool:'Doorway chest stretch 60 sec → Neck side stretch 30 sec each side → Chin tucks 15 reps'
+  },
+  {
+    label:'Day 2', sub:'Lower — Quad', when:'Tuesday',
+    intent:'Legs and core. The Goblet Squat teaches the movement pattern safely before adding a barbell. Dead Bug directly fixes your hip hike.',
+    warmup:'5 min stationary bike → Bodyweight squats 15 reps slow → Hip circles 10 each direction → Leg swings 15 each',
+    exercises:[
+      { name:'Goblet Squat', sets:'3', reps:'12', rest:'75 sec', target:'Quads, glutes, core, hip mobility', priority:false, cue:'Hold one dumbbell at chest height. Feet shoulder-width, toes slightly out. Sit DOWN and BACK — imagine sitting between your feet, not in front of them. Chest tall the whole movement. Knees track over toes. This teaches the squat pattern before a barbell is involved.' },
+      { name:'Leg Press', sets:'3', reps:'15', rest:'75 sec', target:'Quad overload, safe for beginners', priority:false, cue:'Feet mid-plate, shoulder-width. Lower until thighs are parallel to the floor. No bouncing at the bottom. Don\'t lock knees out at the top. Keep it controlled. Light weight — form first.' },
+      { name:'Leg Extension', sets:'3', reps:'15', rest:'60 sec', target:'Quad isolation, knee health', priority:false, cue:'Slow descent — 3 full seconds on the way down. Contract hard at the very top. This isolates the quad muscle and is excellent for knee strengthening and joint health.' },
+      { name:'Walking Lunges', sets:'3', reps:'10 each leg', rest:'75 sec', target:'Quad + glute + balance', priority:false, cue:'Take a long step. Torso upright — don\'t lean forward. Front knee stays behind the toes. Back knee almost touches the floor. Step through rather than pushing back. The balance challenge is the point.' },
+      { name:'Calf Raises', sets:'4', reps:'20', rest:'45 sec', target:'Calves, ankle stability', priority:false, cue:'FULL range — all the way up onto toes, all the way down until you feel the stretch. Pause at the bottom for 1 second. Most people bounce through this and get nothing from it. Slow, full range calf raises are completely different.' },
+      { name:'Dead Bug', sets:'3', reps:'8 each side', rest:'60 sec', target:'Deep core stability — hip hike fix', priority:true, cue:'PRIORITY. Lie on back. Press your lower back HARD into the floor and keep it there the whole time — this is the only cue that matters. Extend opposite arm and leg simultaneously, slowly. This trains your core to brace under load, which directly fixes your hip hike on push-ups.' },
+    ],
+    cardio:'10 min stationary bike, very easy resistance',
+    cool:'Kneeling hip flexor stretch 60 sec each side → Seated forward fold 60 sec → Cat-cow 10 slow reps'
+  },
+  {
+    label:'Day 3', sub:'Rest + Mobility', when:'Wednesday',
+    intent:'Recovery is training. Your muscles are built today, not during the workout. Do the full mobility routine.',
+    isRest: true
+  },
+  {
+    label:'Day 4', sub:'Upper — Pull', when:'Thursday',
+    intent:'Back and biceps. These are the muscles that fix rounded shoulders and build the athletic V-shape.',
+    warmup:'5 min treadmill → Band pull-aparts 20 reps → Shoulder rotations 10 each direction',
+    exercises:[
+      { name:'Lat Pulldown', sets:'3', reps:'12', rest:'75 sec', target:'Lats — the V-taper muscle', priority:false, cue:'Grip slightly wider than shoulders. Pull the bar to your upper chest — lean back 15° only, not more. SQUEEZE your lats at the bottom (imagine pushing your shoulder blades into your back pockets). Slow, controlled return upward.' },
+      { name:'Seated Cable Row', sets:'3', reps:'12', rest:'75 sec', target:'Mid-back thickness + posture', priority:false, cue:'Sit tall, chest proud. Pull to your belly button. Squeeze shoulder blades together at the end position. Do NOT rock your torso back and forth — that makes it a lower back exercise, not a back exercise.' },
+      { name:'Single-Arm Dumbbell Row', sets:'3', reps:'12 each', rest:'60 sec', target:'Lat + rhomboid + grip', priority:false, cue:'Knee and hand on bench. Keep back flat — don\'t rotate. Pull elbow straight up to the ceiling. Lower slowly with control. Corrects imbalances between left and right sides.' },
+      { name:'Dumbbell Bicep Curl', sets:'3', reps:'15', rest:'60 sec', target:'Biceps, arm aesthetics', priority:false, cue:'Stand tall. Elbows pinned at sides — they do not move. Full range: completely extend at the bottom, fully curl at the top with a slight supination (twist outward). No swinging. The movement is in the forearms only.' },
+      { name:'Rear Delt Fly', sets:'3', reps:'15', rest:'60 sec', target:'Rear deltoids — rounded shoulder fix', priority:true, cue:'PRIORITY. Use pec deck reversed or light dumbbells leaning forward. Arms slightly bent. Lead with elbows, not hands. Hard squeeze on the rear deltoids. This directly addresses your rounded shoulders and is as important as face pulls.' },
+      { name:'Hanging Knee Raises', sets:'3', reps:'12', rest:'60 sec', target:'Lower abs, core, grip strength', priority:false, cue:'Dead hang from the bar first. Brace your core. Raise knees to chest slowly. Lower with full control — no swinging. If the bar is too high, ask for ab straps. Grip strength will fatigue — that is a bonus.' },
+    ],
+    cardio:'10 min incline treadmill (level 5)',
+    cool:'Thread the needle 10 reps each side → Chin tucks 15 reps → Neck side stretch 30 sec each'
+  },
+  {
+    label:'Day 5', sub:'Lower — Hinge', when:'Fri or Sat',
+    intent:'Posterior chain day. This is your back pain cure. Every exercise here directly addresses your lower back, pelvic tilt, and hip weakness.',
+    warmup:'5 min bike → Glute bridges 20 reps → Clamshells 15 each → Leg swings 15 each direction',
+    exercises:[
+      { name:'Romanian Deadlift (RDL)', sets:'3', reps:'12', rest:'90 sec', target:'Hamstrings + glutes + lower back rehab', priority:true, cue:'MOST IMPORTANT EXERCISE in your program. Hinge at the hips (not the waist). Soft bend in knees. Bar stays close to your legs the entire way down. Feel the hamstring stretch. Drive hips forward to stand — do not pull with your back. Go significantly lighter than you think. Form is everything here.' },
+      { name:'Leg Curl (Machine)', sets:'3', reps:'15', rest:'60 sec', target:'Hamstring isolation, knee health', priority:false, cue:'Lie face down. Curl heels to glutes slowly. The return is 3 full seconds — do not let it drop. Fully extend at the bottom position. Hamstring isolation.' },
+      { name:'Hip Thrust (Barbell or Dumbbell)', sets:'3', reps:'15', rest:'75 sec', target:'Glutes — directly fixes pelvic tilt', priority:true, cue:'PRIORITY. Upper back on bench. Weight on hips with a pad. Drive hips up until your body is a straight line from knees to shoulders. SQUEEZE glutes hard at the top for 1 full second. This exercise directly fixes your anterior pelvic tilt. Start with bodyweight if unsure.' },
+      { name:'Sumo Dumbbell Deadlift', sets:'3', reps:'10', rest:'90 sec', target:'Full posterior chain', priority:false, cue:'Wide stance, toes pointed out 45°. Dumbbell between legs. Chest tall, hips back. Stand tall at the top. Easier on your lower back than conventional deadlift — appropriate for your stage.' },
+      { name:'Side-Lying Clamshells', sets:'3', reps:'15 each', rest:'45 sec', target:'Glute medius — pelvic stability', priority:true, cue:'PRIORITY. Lie on side, knees bent, feet together. Open top knee WITHOUT letting your hips rotate backward. If it feels easy, you have likely never properly activated your hip abductors. This is extremely common in people with lower back and pelvic pain.' },
+      { name:'Hollow Body Hold', sets:'3', reps:'20 sec', rest:'45 sec', target:'Deep core + athletic posture base', priority:false, cue:'Lie on back, arms overhead. Press lower back into floor. Raise shoulders and legs slightly off the floor. Your body forms a slight curved hollow shape. Breathe normally. This trains your core the way it is actually used in athletic movement.' },
+    ],
+    cardio:'10 min bike cool-down, very easy pace',
+    cool:'90/90 hip stretch 60 sec each side → Pigeon pose 60 sec each → Seated forward fold 60 sec'
+  },
+];
+
+function renderDayTabs() {
+  const tabsEl = document.getElementById('day-tabs');
+  days.forEach((d, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'day-tab' + (i === 0 ? ' active' : '');
+    btn.innerHTML = `${d.label}<br><span style="font-size:9px;opacity:0.6">${d.when}</span>`;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderDayDetail(i);
+    });
+    tabsEl.appendChild(btn);
+  });
+  renderDayDetail(0);
+}
+
+function renderDayDetail(i) {
+  const d = days[i];
+  const el = document.getElementById('day-detail');
+  if (d.isRest) {
+    el.innerHTML = `
+      <div class="card green-top" style="margin-bottom:16px">
+        <div class="card-title">Rest + Full Mobility Day</div>
+        <p class="card-sub" style="margin-top:6px">Your muscles are built on rest days, not workout days. The workout is the signal. Recovery is where adaptation happens.</p>
+      </div>
+      <div class="info-box green" style="margin-bottom:16px">30 min easy walk outdoors — same wake time as gym days. Full night mobility routine. See the Mobility tab for every stretch.</div>
+      <div class="card blue-top">
+        <div class="label blue">Why This Day Matters For You Specifically</div>
+        <p class="card-sub">You have shoulder tightness, lower back stiffness, and pelvic issues. These do not fix themselves in the gym. They fix themselves on days like today when you do the mobility work consistently and your nervous system gets to down-regulate.</p>
+      </div>`;
+    return;
+  }
+  el.innerHTML = `
+    <div style="margin-bottom:20px">
+      <span class="tag accent">${d.sub}</span><span class="tag muted">${d.when}</span>
+      <h3 style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);margin:10px 0 6px">${d.label}: ${d.sub}</h3>
+      <p style="font-family:var(--body);font-style:italic;font-size:13px;color:var(--ink2);line-height:1.65">${d.intent}</p>
+    </div>
+    <div class="label muted">Warmup</div>
+    <div class="info-box green">${d.warmup}</div>
+    <div class="label">Exercises</div>
+    ${d.exercises.map(ex => `
+      <div class="ex-card${ex.priority ? ' priority' : ''}">
+        <div class="ex-header">
+          <div>
+            <div class="ex-name">${ex.name} ${ex.priority ? '<span class="tag accent">Priority</span>' : ''}</div>
+            <div class="ex-target">${ex.target}</div>
+          </div>
+          <div class="ex-sets">
+            <div class="ex-sets-num">${ex.sets}×${ex.reps}</div>
+            <div class="ex-rest">rest ${ex.rest}</div>
+          </div>
+        </div>
+        <hr class="rule">
+        <p class="ex-cue">${ex.cue}</p>
+      </div>`).join('')}
+    <div class="label muted" style="margin-top:20px">Cardio Finisher</div>
+    <div class="info-box green">${d.cardio}</div>
+    <div class="label muted">Cool Down</div>
+    <div class="info-box blue">${d.cool}</div>`;
+}
+
+renderDayTabs();
+
+// ═══════════════════════════════════
+// MOBILITY ACCORDIONS
+// ═══════════════════════════════════
+const routines = [
+  {
+    title:'Morning Activation',
+    meta:'10 min · Before leaving for gym',
+    color:'var(--accent2)',
+    intro:'Wakes your glutes and core before they are asked to work under load. Directly addresses your two biggest issues — glute inactivation and core instability — before you put any stress on them.',
+    exercises:[
+      { name:'Glute Bridge', dur:'2×20 reps', detail:'On your back, knees bent. Drive hips straight up. Squeeze glutes hard at the top, hold 1 second. Your glutes have been inactive all night — this switches them back on before asking them to squat and hinge.' },
+      { name:'Dead Bug', dur:'2×8 each side', detail:'Lower back pressed firmly into the floor throughout. Extend opposite arm and leg slowly. Activates the deep core stabilisers. Same exercise as in your workout — daily repetition builds the pattern.' },
+      { name:'Cat-Cow', dur:'10 slow reps', detail:'On all fours. Full arch of the spine, then full round. Breathe out when rounding. Mobilises your thoracic spine which has been locked in flexion all night.' },
+      { name:'Chin Tucks', dur:'3×15 reps, hold 3 sec each', detail:'Make a double chin. You should feel a stretch at the back of the neck and upper spine. Done consistently for 8 weeks, this physically reshapes your head and neck position.' },
+      { name:'Hip Circles', dur:'10 each direction', detail:'Hands on hips, make big slow circles. Lubricates the hip joint before the squatting and hinging movements in today\'s workout.' },
+    ]
+  },
+  {
+    title:'Pre-Workout Warmup',
+    meta:'7 min · At the gym, before lifting',
+    color:'var(--blue)',
+    intro:'Prepares your joints for load. Injury statistics consistently show that people who skip warmups are at significantly higher injury risk. Never skip this.',
+    exercises:[
+      { name:'Treadmill Walk', dur:'5 min, incline 2–3', detail:'Not running. A brisk walk. Raises core body temperature, gets blood flowing to muscles and tendons, prepares the cardiovascular system.' },
+      { name:'Leg Swings (front-back)', dur:'15 each leg', detail:'Hold a wall for balance. Swing your leg forward and backward in a relaxed arc. Hip flexors and hamstrings loosen up. Critical before any lower body day.' },
+      { name:'Leg Swings (side-to-side)', dur:'15 each leg', detail:'Same but crossing the body. Hip abductor activation. The muscle you specifically need for clamshells and lateral stability.' },
+      { name:'Arm Circles', dur:'10 forward, 10 backward', detail:'Full range of motion, performed slowly. Rotator cuff preparation. Prevents shoulder impingement when pressing and pulling overhead.' },
+      { name:'Band Pull-Aparts', dur:'2×20 reps', detail:'If the gym has resistance bands. Directly warms up rear deltoids and rotator cuff — your problem area. This takes 60 seconds and prevents months of shoulder injury.' },
+      { name:'Bodyweight Squats', dur:'15 reps, slow and deep', detail:'Full depth, fully controlled. Final warmup for knees, hips, and ankles. Never skip this on Day 2 or Day 5.' },
+    ]
+  },
+  {
+    title:'Night Mobility Routine',
+    meta:'12–15 min · Every night before sleep — non-negotiable',
+    color:'var(--accent)',
+    intro:'This is the most important routine in your entire program. Your posture issues — pelvic tilt, back pain, shoulder tightness — are fixed HERE, not in the gym. Every single night. No exceptions. Within 3 weeks, your lower back stiffness will be dramatically reduced.',
+    exercises:[
+      { name:'90/90 Hip Stretch', dur:'60 sec each side', detail:'Sit on the floor with both knees at 90°. Lean forward over the front leg. Breathe deeply into the hip. FIXES anterior pelvic tilt by releasing the hip capsule and external rotators. You will feel this in your glute and outer hip. It should be moderately uncomfortable — that is the tightness.' },
+      { name:'Kneeling Hip Flexor Stretch', dur:'60 sec each side', detail:'Lunge position with back knee on the ground. Push hips gently forward. Squeeze the back glute hard. Feel the stretch at the front of the back hip. This reverses the specific effect of sitting at a desk all day. Probably the single most important stretch for your body type.' },
+      { name:'Doorway Chest Stretch', dur:'60 sec', detail:'Arms at 90° on the door frame, step forward through it. Feel the chest and front shoulder open. Reverses the rounded-forward shoulder position from studying and phone use. Do this every single day.' },
+      { name:'Thread the Needle', dur:'8 reps each side', detail:'On all fours. Slide one arm under your body, rotating your thoracic spine. Your mid-back has been locked in flexion all day. This directly opens it back up. Key for both shoulder tightness and back stiffness.' },
+      { name:'Pigeon Pose (or Figure-4)', dur:'60 sec each side', detail:'Deep hip opener. Releases the piriformis — a muscle that, when tight, is a major contributor to your lower back and pelvic discomfort. This stretch will be uncomfortable at first. That is the tightness releasing. It will get easier within 2 weeks.' },
+      { name:'Seated Forward Fold', dur:'60 sec', detail:'Legs straight, reach for your toes. Back rounds naturally. Releases hamstrings and the entire posterior chain. Breathe deeply — each exhale, fold a little deeper. Never force it.' },
+      { name:'Supine Spinal Twist', dur:'45 sec each side', detail:'Lie on your back. One knee crosses over the body. Arms out in a T shape. Look the opposite direction. Decompresses the lumbar spine. Your lower back will appreciate this enormously after a training day.' },
+      { name:'Chin Tucks', dur:'3×15 reps', detail:'Last thing before you sleep. Daily chin tucks done consistently for 8 weeks will physically reshape the position of your head and neck. This is not an exaggeration — it is measurable.' },
+    ]
+  }
+];
+
+function renderMobility() {
+  const el = document.getElementById('mobility-content');
+  routines.forEach((r, i) => {
+    const colorClass = r.color === 'var(--accent)' ? 'accent' : r.color === 'var(--blue)' ? 'blue' : 'accent2';
+    const div = document.createElement('div');
+    div.style.marginBottom = '12px';
+    div.innerHTML = `
+      <button class="accordion-btn${i === 0 ? ' open' : ''}" style="border-left:3px solid ${r.color}" data-acc="${i}">
+        <div>
+          <div class="acc-title" style="${i === 0 ? 'color:var(--paper)' : ''}">${r.title}</div>
+          <div class="acc-meta">${r.meta}</div>
+        </div>
+        <span class="acc-icon">${i === 0 ? '−' : '+'}</span>
+      </button>
+      <div class="accordion-body${i === 0 ? ' open' : ''}">
+        <p class="acc-intro">${r.intro}</p>
+        ${r.exercises.map(ex => `
+          <div style="padding:12px 0;border-bottom:1px solid var(--rule)">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;gap:8px">
+              <span style="font-family:var(--body);font-weight:600;font-size:13px;color:var(--ink)">${ex.name}</span>
+              <span style="font-family:var(--mono);font-size:11px;color:${r.color};flex-shrink:0">${ex.dur}</span>
+            </div>
+            <p style="font-family:var(--body);font-size:13px;color:var(--ink2);line-height:1.65">${ex.detail}</p>
+          </div>`).join('')}
+      </div>`;
+    el.appendChild(div);
+  });
+
+  document.querySelectorAll('.accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.accordion-btn').forEach(b => {
+        b.classList.remove('open');
+        b.querySelector('.acc-icon').textContent = '+';
+        b.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        btn.classList.add('open');
+        btn.querySelector('.acc-icon').textContent = '−';
+        body.classList.add('open');
+      }
+    });
+  });
+}
+
+renderMobility();
+</script>
+</body>
+</html>
